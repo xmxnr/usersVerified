@@ -6,6 +6,7 @@ const {
 	update,
 	login,
 	logged,
+	userVerified,
 } = require('../controllers/user.controllers');
 const express = require('express');
 const hashPassword = require('../middlewares/hashPassword.middleware');
@@ -16,6 +17,7 @@ const emailCode = require('../middlewares/emailCode.middlware');
 
 const routerUser = express.Router();
 
+//estaticas
 routerUser
 	.route('/')
 	.get(verifyJWT, getAll)
@@ -25,6 +27,10 @@ routerUser.route('/login').post(loginMiddleware, sessionJWT, login);
 
 routerUser.route('/me').get(verifyJWT, logged);
 
+//estaticas-dinamicas
+routerUser.route('/verify/:code').get(userVerified);
+
+//dinamicas
 routerUser
 	.route('/:id')
 	.get(verifyJWT, getOne)
