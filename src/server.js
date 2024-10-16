@@ -1,4 +1,5 @@
 const app = require('./app');
+require('./models')
 const sequelize = require('./utils/connection');
 
 const PORT = process.env.PORT || 8080;
